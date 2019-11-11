@@ -26,7 +26,7 @@ japi.config['SAFEEXT'] = {'md', 'markdown'} # Acceptable file formats (WIP, nonf
 japi.config['SECUREID'] = 'asdf12345' # Token id. This will get passed as a header to authorize you
 japi.config['HOSTIP'] = '127.0.0.1' # Listening IP
 japi.config['PORT'] = '10000' # Listening port
-``
+```
 
 ## Contributing
 
