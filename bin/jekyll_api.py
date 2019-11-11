@@ -33,7 +33,6 @@ def make_new_post():
         return Response("{'Error':'No file'}\n", status=417, mimetype='application/json')
     if request.headers['id'] != japi.config['SECUREID']:
         return Response("{'Error':'Invalid token'}\n", status=401, mimetype='application/json')
-    if 
     new_post_file = request.files['file']
     #tf_file_name = transformFileName(new_post_file.filename)
     secure_file_name = secure_filename(new_post_file.filename)
