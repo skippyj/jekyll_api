@@ -3,6 +3,7 @@
 
 # Imports
 import os # File location stuff
+import magic # Testing uploaded file type (WIP)
 import flask # API Framework
 from flask import request, Response # API framework
 from werkzeug.utils import secure_filename # Secure filenames helper
@@ -35,9 +36,14 @@ def make_new_post():
         return Response("{'Error':'Invalid token'}\n", status=401, mimetype='application/json')
     new_post_file = request.files['file']
     #tf_file_name = transformFileName(new_post_file.filename)
-    secure_file_name = secure_filename(new_post_file.filename)
-    with open(os.path.join(japi.config['POSTDIR'], secure_file_name), 'wb') as post:
-        post.write(request.files['file'].read())
-    return Response("{'Success':'Post published}\n", status=200, mimetype='application/json')
-
+    # Read the file and verify it's not malicious (WIP)
+    file_content = new_post_file.read()
+    file_type = magic.from_buffer(file_content)
+    if file_type == 'ASCII text':
+        secure_file_name = secure_filename(new_post_file.filename)
+        with open(os.path.join(japi.config['POSTDIR'], secure_file_name), 'wb') as post:
+            post.write(request.files['file'].read())
+        return Response("{'Success':'Post published}\n", status=200, mimetype='application/json')
+    else:
+        return Response("{'Error':'Invalid file type'}\n", status=415, mimetype='application/json')
 japi.run(host=japi.config['HOSTIP'], port=japi.config['PORT'])
