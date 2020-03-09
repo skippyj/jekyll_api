@@ -1,9 +1,9 @@
 ## Branch naming
 ### New feature
-<username>/FEAT-XXXX
+\<username\>/FEAT-XXXX
 
 ### Bugfix
-<username>/FIX-XXXX
+\<username\>/FIX-XXXX
 
 ### Documentation
-<username>/DOC-XXXX
+\<username\>/DOC-XXXX
